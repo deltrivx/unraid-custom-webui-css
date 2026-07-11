@@ -1,10 +1,10 @@
-# Unraid Custom WebUI CSS
+# Unraid Custom WebUI CSS 主题
 
-This repository contains a custom Unraid WebGUI theme built for the **Custom WebUI CSS** plugin.
+这是一个基于 **Custom WebUI CSS** 插件实现的 Unraid WebGUI 自定义主题。
 
-It is intended for Unraid `6.12.x` style WebGUI layouts and was exported from the current `192.168.31.2` system after the latest visual adjustments.
+本主题来自当前 Unraid `192.168.31.2` 系统的最新效果导出，包含主样式、黑色样式覆盖文件和背景图片，适合通过 Custom WebUI CSS 插件从零部署。
 
-## Files
+## 主题文件
 
 ```text
 /boot/config/plugins/custom.css/
@@ -14,23 +14,27 @@ It is intended for Unraid `6.12.x` style WebGUI layouts and was exported from th
     └── background.jpg
 ```
 
-## Install
+## 安装前准备
 
-1. Install **Custom WebUI CSS** from the Unraid Apps / Community Applications store.
-2. Download this repository's theme files into `/boot/config/plugins/custom.css/`.
-3. Enable the plugin service.
-4. Copy the files into the runtime plugin directory or refresh/restart the WebGUI.
-5. Review the Display Settings notes in `docs/display-settings.md`.
+1. 打开 Unraid 的 **Apps / Community Applications**。
+2. 搜索并安装 **Custom WebUI CSS** 插件。
+3. 确认 Unraid 可以访问 GitHub Raw 文件地址。
 
-### One-Line Install
+本主题使用的是 Custom WebUI CSS 插件，不是 Theme Engine。
 
-Run this on the Unraid server:
+## 一键安装
+
+在 Unraid 终端执行：
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
 ```
 
-### Manual Install
+安装完成后刷新 Unraid WebGUI 页面即可。
+
+## 手动安装
+
+如果你希望手动部署，可以在 Unraid 终端执行：
 
 ```bash
 mkdir -p /boot/config/plugins/custom.css/assets
@@ -50,15 +54,45 @@ cp /boot/config/plugins/custom.css/style-black.css /usr/local/emhttp/plugins/cus
 cp /boot/config/plugins/custom.css/assets/background.jpg /usr/local/emhttp/plugins/custom.css/assets/background.jpg
 ```
 
-Refresh the Unraid WebGUI after installation.
+## 更新主题
 
-## Update
+再次执行一键安装命令即可更新到仓库最新版：
 
-Run the same one-line install command again. The script overwrites only the theme files managed by this repository.
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
+```
 
-## Rollback
+脚本只会覆盖本仓库管理的主题文件：
 
-Disable **Custom WebUI CSS** from the plugin settings, or remove these files:
+- `style.css`
+- `style-black.css`
+- `assets/background.jpg`
+
+## 显示设置
+
+安装后建议打开 Unraid：
+
+```text
+Settings -> Display Settings
+```
+
+将深色界面中主要字体颜色调整为白色或接近白色，避免文字在背景图和玻璃拟态模块上对比度不足。
+
+推荐值：
+
+```text
+Page text color: #ffffff
+Header text color: #ffffff
+Menu text color: #ffffff
+```
+
+不同 Unraid 版本或插件环境下字段名称可能略有差异，核心目标是让页面正文、标题和菜单文字保持白色或接近白色。
+
+## 回滚
+
+如果需要停用主题，可以先在插件设置中关闭 **Custom WebUI CSS**。
+
+也可以手动删除主题文件：
 
 ```bash
 rm -f /boot/config/plugins/custom.css/style.css
@@ -69,8 +103,56 @@ rm -f /usr/local/emhttp/plugins/custom.css/style-black.css
 rm -f /usr/local/emhttp/plugins/custom.css/assets/background.jpg
 ```
 
-## Notes
+然后刷新 Unraid WebGUI。
 
-- This theme uses Custom WebUI CSS, not Theme Engine.
-- Keep the background image path as `assets/background.jpg`; the CSS references that location.
-- If text contrast looks wrong after installation, check `docs/display-settings.md`.
+## 常见问题
+
+### 样式没有生效
+
+检查 Custom WebUI CSS 是否已启用：
+
+```bash
+cat /boot/config/plugins/custom.css/custom.css.cfg
+```
+
+正常应看到：
+
+```text
+SERVICE="enabled"
+```
+
+再检查运行目录是否存在文件：
+
+```bash
+ls -la /usr/local/emhttp/plugins/custom.css/
+ls -la /usr/local/emhttp/plugins/custom.css/assets/
+```
+
+### 背景图没有显示
+
+确认背景图已下载到两个位置：
+
+```bash
+ls -lh /boot/config/plugins/custom.css/assets/background.jpg
+ls -lh /usr/local/emhttp/plugins/custom.css/assets/background.jpg
+```
+
+### 页面还是旧效果
+
+尝试强制刷新浏览器缓存：
+
+```text
+Windows / Linux: Ctrl + F5
+macOS: Command + Shift + R
+```
+
+如果仍未生效，可以关闭再启用 Custom WebUI CSS 插件，然后重新刷新页面。
+
+## 文件说明
+
+- `style.css`：主题主样式文件。
+- `style-black.css`：黑色主题兼容/覆盖样式。
+- `assets/background.jpg`：主题背景图片。
+- `scripts/install.sh`：一键安装脚本。
+- `docs/display-settings.md`：显示设置说明。
+- `docs/troubleshooting.md`：排错说明。

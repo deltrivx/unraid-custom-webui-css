@@ -2049,3 +2049,73 @@ body:has(#menu .nav-item.active a[href="/Main"]) form[name="arrayOps"] ~ table.A
     background-color: rgba(20, 24, 34, 0.55) !important;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
 }
+
+/* 37. Code editor compatibility: keep global form styling out of editor input layers */
+.ace_editor,
+.CodeMirror,
+.cm-editor,
+.monaco-editor {
+    font-family: monospace !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    text-shadow: none !important;
+    box-sizing: border-box !important;
+}
+
+.ace_editor *,
+.CodeMirror *,
+.cm-editor *,
+.monaco-editor * {
+    font-family: inherit !important;
+    text-transform: none !important;
+    letter-spacing: normal !important;
+    text-shadow: none !important;
+}
+
+.ace_editor textarea,
+.ace_editor .ace_text-input,
+.CodeMirror textarea,
+.cm-editor textarea,
+.monaco-editor textarea {
+    position: absolute !important;
+    z-index: auto !important;
+    width: 1px !important;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 1em !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+    transform: none !important;
+    color: transparent !important;
+    font: inherit !important;
+    line-height: inherit !important;
+    resize: none !important;
+    overflow: hidden !important;
+}
+
+.ace_editor input,
+.CodeMirror input,
+.cm-editor input,
+.monaco-editor input {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    filter: none !important;
+    transform: none !important;
+    font: inherit !important;
+    line-height: inherit !important;
+}

@@ -8,9 +8,10 @@ VERSION=""
 
 usage() {
   cat <<'EOF'
-Usage: install.sh [--version VERSION] [--list] [--help]
+Usage: install.sh [--upgrade] [--version VERSION] [--list] [--help]
 
-Without arguments, an interactive version menu is shown when a terminal is available.
+Without arguments, an interactive action menu is shown when a terminal is available.
+Use --upgrade to update an existing installation directly to latest.
 EOF
 }
 
@@ -47,8 +48,29 @@ select_version() {
   VERSION=$(printf '%s' "$index" | jq -r ".versions[$((choice - 1))].id")
 }
 
+select_action() {
+  cat <<'EOF'
+Custom WebUI CSS theme
+  1) Upgrade installed theme to latest
+  2) Choose a version manually
+  3) List available versions
+  4) Exit
+EOF
+  printf 'Select action [1]: '
+  read -r action
+  action=${action:-1}
+  case "$action" in
+    1) VERSION=latest ;;
+    2) select_version ;;
+    3) list_versions; exit 0 ;;
+    4) exit 0 ;;
+    *) echo "Invalid selection" >&2; exit 64 ;;
+  esac
+}
+
 while [ "$#" -gt 0 ]; do
   case "$1" in
+    --upgrade) VERSION=latest; shift ;;
     --version) [ "$#" -ge 2 ] || { usage >&2; exit 64; }; VERSION=$2; shift 2 ;;
     --list) list_versions; exit 0 ;;
     --help|-h) usage; exit 0 ;;
@@ -61,7 +83,7 @@ command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 69; }
 
 if [ -z "$VERSION" ]; then
   if [ -t 0 ]; then
-    select_version
+    select_action
   else
     VERSION=latest
   fi

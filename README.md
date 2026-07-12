@@ -34,7 +34,13 @@
 bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
 ```
 
-在交互式终端中运行时，脚本会列出 `latest` 和历史时间版本供选择；通过管道或自动化环境执行时默认安装 `latest`。安装完成后刷新 Unraid WebGUI 页面即可。
+在交互式终端中运行时，脚本首先提供“一键升级到最新版”“手动选择版本”“查看版本列表”三个操作；通过管道或自动化环境执行时默认安装 `latest`。安装完成后刷新 Unraid WebGUI 页面即可。
+
+已安装用户直接升级到最新版：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --upgrade
+```
 
 列出可用版本：
 

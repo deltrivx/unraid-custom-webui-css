@@ -1,5 +1,16 @@
 # Changelog
 
+## latest / 20260712-162005 - 2026-07-12
+
+### Installer workflow
+
+- Added a first-level interactive action menu for existing and new users.
+- Added a one-step "Upgrade installed theme to latest" option as the default action.
+- Kept manual version selection as a separate option for rollbacks and compatibility testing.
+- Added an in-menu version list and a clean exit option.
+- Added `--upgrade` for unattended upgrades while preserving `--version`, `--list` and `--help`.
+- Reused the same validated download and installation path for upgrades and fresh installs, so persistent and runtime theme files remain synchronized.
+
 ## latest / 20260712-161553 - 2026-07-12
 
 ### Apps page compatibility

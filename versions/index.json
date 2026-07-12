@@ -4,8 +4,13 @@
   "versions": [
     {
       "id": "latest",
-      "label": "Latest - Unraid 7.3.2 Apps compatibility",
-      "released_at": "2026-07-12"
+      "label": "Latest - interactive upgrade workflow",
+      "released_at": "2026-07-12T16:20:05+08:00"
+    },
+    {
+      "id": "20260712-162005",
+      "label": "Interactive upgrade workflow",
+      "released_at": "2026-07-12T16:20:05+08:00"
     },
     {
       "id": "20260712-161553",

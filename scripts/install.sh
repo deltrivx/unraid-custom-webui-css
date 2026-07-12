@@ -23,7 +23,12 @@ select_version() {
     id=$(printf '%s' "$index" | jq -r ".versions[$i].id")
     label=$(printf '%s' "$index" | jq -r ".versions[$i].label")
     released=$(printf '%s' "$index" | jq -r ".versions[$i].released_at")
-    printf '  %s) %s - %s (%s)\n' "$((i + 1))" "$id" "$label" "$released"
+    if [ "$id" = latest ]; then
+      display="$label"
+    else
+      display="$id + $label"
+    fi
+    printf '  %s) %s (%s)\n' "$((i + 1))" "$display" "$released"
     i=$((i + 1))
   done
   printf 'Select version [1]: '

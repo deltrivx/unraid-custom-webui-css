@@ -4,12 +4,7 @@
   "versions": [
     {
       "id": "latest",
-      "label": "Latest (v1.2.0)",
-      "released_at": "2026-07-12"
-    },
-    {
-      "id": "v1.2.0",
-      "label": "One-command installer",
+      "label": "latest + v1.2.0",
       "released_at": "2026-07-12"
     },
     {

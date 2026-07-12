@@ -37,18 +37,20 @@ apply_display_settings() {
       printf 'theme=%s\n' "$(read_display_value theme)"
       printf 'header=%s\n' "$(read_display_value header)"
       printf 'headermetacolor=%s\n' "$(read_display_value headermetacolor)"
+      printf 'background=%s\n' "$(read_display_value background)"
     } > "$STATE_FILE"
   fi
   set_display_value theme black
   set_display_value header ffffff
   set_display_value headermetacolor ffffff
+  set_display_value background 000000
 }
 
 restore_display_settings() {
   [ -f "$STATE_FILE" ] || return 0
   while IFS='=' read -r key value; do
     case "$key" in
-      theme|header|headermetacolor) set_display_value "$key" "$value" ;;
+      theme|header|headermetacolor|background) set_display_value "$key" "$value" ;;
     esac
   done < "$STATE_FILE"
   rm -f "$STATE_FILE"
@@ -81,7 +83,7 @@ install_version() {
   install -m 0644 "$PERSIST_DIR/assets/background.jpg" "$RUNTIME_DIR/assets/background.jpg"
   apply_display_settings
 
-  echo "主题 $VERSION 已安装。显示主题已设为黑色，页眉文字已设为白色。"
+  echo "主题 $VERSION 已安装。显示主题和标题背景已设为黑色，页眉文字已设为白色。"
   echo "请强制刷新 Unraid WebGUI。"
 }
 

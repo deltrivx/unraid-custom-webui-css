@@ -1,25 +1,25 @@
-# Changelog
+# 更新日志
 
 ## v1.2.0 - 2026-07-12
 
-### One-command workflow
+### 单命令交互流程
 
-- Consolidated installation, latest upgrade, rollback and version listing into the original one-command installer.
-- Added a single first-level menu: upgrade to latest, choose a version, list versions or exit.
-- Removed all alternative command-line workflows so users only need one command.
-- Replaced timestamp identifiers with concise semantic versions: `v1.2.0`, `v1.1.0` and `v1.0.0`.
+- 将安装、升级最新版、回滚历史版本和查看版本统一到原有的一键安装命令中。
+- 新增统一操作菜单：一键升级最新版、手动选择版本、查看版本列表或退出。
+- 移除其他命令行参数和重复操作方式，用户只需记住一条安装命令。
+- 将冗长的时间戳版本号调整为简洁的语义化版本：`v1.2.0`、`v1.1.0` 和 `v1.0.0`。
 
 ## v1.1.0 - 2026-07-12
 
-### Unraid 7.3.2 Apps compatibility
+### Unraid 7.3.2 应用页面兼容
 
-- Removed legacy Community Applications layout overrides that conflicted with the updated Apps interface.
-- Restored native Apps search, sidebar, application grid, card sizing, scrolling and content flow.
-- Removed forced positioning and heights that caused overlap, hidden modules and zero-height content.
-- Kept the global Cyberpunk theme and non-Apps page styling unchanged.
-- Retained the code-editor compatibility fix.
+- 移除与新版 Community Applications 应用界面冲突的旧布局覆盖。
+- 恢复应用页面原生搜索栏、分类侧栏、应用网格、卡片尺寸、滚动和内容流布局。
+- 移除会导致顶部重叠、模块隐藏和内容区高度为零的强制定位与高度设置。
+- 保留全局赛博朋克主题及其他页面的视觉样式，不影响非应用页面。
+- 保留代码编辑器输入区域兼容修复。
 
 ## v1.0.0 - 2026-07-11
 
-- Initial archived theme release.
-- Includes the legacy full Community Applications customization.
+- 首个归档版本。
+- 保留旧版 Community Applications 应用页面完整定制样式。

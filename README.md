@@ -37,6 +37,7 @@ bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui
 Dynamix color theme: Black
 Header custom text color: #ffffff
 Header custom secondary text color: #ffffff
+Header custom background color: #000000
 ```
 
 对应配置会写入 `/boot/config/plugins/dynamix/dynamix.cfg`。脚本仅在第一次安装时记录原值；重复升级不会覆盖备份。一键卸载时会恢复安装前的值。

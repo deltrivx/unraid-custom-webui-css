@@ -1378,6 +1378,19 @@ body:has(#menu .nav-item.active a[href="/Apps"]) #caInlineSearchBox {
     padding-left: 10px !important;
 }
 
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter,
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caDesktopSearchInline,
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caDesktopSearchInline .awesomplete,
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caInlineSearchIcon {
+    flex-shrink: 0 !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caInlineSearchIcon {
+    position: relative !important;
+    left: 0 !important;
+    transform: none !important;
+}
+
 body:has(#menu .nav-item.active a[href="/Apps"]) .ca_display_area {
     height: calc(100vh - 237px) !important;
     min-height: 0 !important;
@@ -1446,6 +1459,14 @@ body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
 
 /* Apps mobile: preserve CA's native responsive geometry. */
 @media (max-width: 767px) {
+    html:has(body #menu .nav-item.active a[href="/Apps"]) {
+        --ca-header-image-height: 91px !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #header {
+        display: flex !important;
+    }
+
     body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder,
     .Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder {
         top: calc(var(--ca-header-image-height) + var(--ca-menu-height) + var(--search-area-top)) !important;
@@ -1471,11 +1492,17 @@ body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
     body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems,
     .Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems {
         top: calc(var(--ca-header-image-height) + var(--ca-menu-height) + var(--ca-menu-top-offset)) !important;
-        bottom: 0 !important;
-        left: 0 !important;
+        top: calc(var(--ca-header-image-height) + var(--ca-menu-height) + var(--search-area-top) + 5rem) !important;
+        bottom: 10px !important;
+        left: 10px !important;
+        width: 140px !important;
         height: auto !important;
         max-height: none !important;
-        padding-top: 0 !important;
+        padding-top: 8px !important;
+        border-radius: 12px !important;
+        background: rgba(29, 27, 27, 0.96) !important;
+        background-color: rgba(29, 27, 27, 0.96) !important;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 10px 28px rgba(0,0,0,0.28) !important;
     }
 
     body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea,
@@ -1487,6 +1514,284 @@ body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
         height: 100% !important;
         padding-left: 1rem !important;
         transform: none !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter {
+        display: flex !important;
+        flex: 0 1 190px !important;
+        width: 190px !important;
+        max-width: 190px !important;
+        min-width: 0 !important;
+        height: 26px !important;
+        min-height: 26px !important;
+        align-self: center !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caDesktopSearchInline {
+        display: inline-flex !important;
+        align-items: center !important;
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 26px !important;
+        box-sizing: border-box !important;
+        padding: 0 6px 0 0 !important;
+        gap: 2px !important;
+        border-radius: 10px !important;
+        background: rgba(20, 24, 34, 0.55) !important;
+        background-color: rgba(20, 24, 34, 0.55) !important;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caDesktopSearchInline .awesomplete {
+        flex: 1 1 auto !important;
+        width: auto !important;
+        min-width: 0 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter #caInlineSearchBox {
+        flex: 1 1 auto !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        height: 24px !important;
+        box-sizing: border-box !important;
+        padding: 0 4px !important;
+        border: 0 !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        line-height: 24px !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caInlineSearchIcon {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        box-sizing: border-box !important;
+        padding: 0 !important;
+        font-size: 1.8rem !important;
+        line-height: 1 !important;
+        opacity: 0.9 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caInlineSearchClear {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 24px !important;
+        width: 24px !important;
+        height: 24px !important;
+        padding: 0 !important;
+        line-height: 1 !important;
+        font-size: 1.6rem !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .showMenuButton,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .closeMenuButton,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caCreditsInfo,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSettingsGear {
+        align-items: center !important;
+        justify-content: center !important;
+        width: 34px !important;
+        min-width: 34px !important;
+        height: 34px !important;
+        min-height: 34px !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        font-size: 2.1rem !important;
+        line-height: 1 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .showMenuButton.menuHidden,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .closeMenuButton.menuShowing {
+        display: inline-flex !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain {
+        flex: 0 0 auto !important;
+        min-width: max-content !important;
+        overflow: visible !important;
+        flex-wrap: nowrap !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea {
+        align-items: center !important;
+        justify-content: flex-start !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        flex-wrap: nowrap !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none !important;
+        overscroll-behavior-x: contain;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .mobileMenuButton {
+        position: sticky !important;
+        left: 0 !important;
+        z-index: 4 !important;
+        flex: 0 0 44px !important;
+        width: 44px !important;
+        min-width: 44px !important;
+        box-sizing: border-box !important;
+        padding-right: 10px !important;
+        border-radius: 0 !important;
+        background: transparent !important;
+        background-color: transparent !important;
+        box-shadow: none !important;
+        align-self: center !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter {
+        flex: 0 0 190px !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain > .caInlineStripWrap {
+        flex: 0 0 auto !important;
+        min-width: max-content !important;
+        height: 26px !important;
+        align-items: center !important;
+        overflow: visible !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain > .caInlineStripWrap > ul {
+        width: max-content !important;
+        min-width: max-content !important;
+        height: 26px !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        overflow: visible !important;
+        scrollbar-width: none !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain > .caInlineStripWrap > ul > li.caButton {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        height: 26px !important;
+        min-height: 26px !important;
+        box-sizing: border-box !important;
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        line-height: 1 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #sortIconArea,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .dockerSearch,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .templateSearch,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .ca_displayCount {
+        height: 26px !important;
+        min-height: 26px !important;
+        box-sizing: border-box !important;
+        align-items: center !important;
+        align-self: center !important;
+        line-height: 1 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain > .ca_displayCount {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        flex: 0 0 auto !important;
+        height: 26px !important;
+        min-height: 26px !important;
+        box-sizing: border-box !important;
+        padding: 0 6px !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        line-height: 1 !important;
+        white-space: nowrap !important;
+        vertical-align: middle !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .dockerSearch,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .templateSearch {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #menu,
+    body:has(#menu .nav-item.active a[href="/Apps"]) #menu .nav-tile,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
+        scrollbar-width: none !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #menu::-webkit-scrollbar,
+    body:has(#menu .nav-item.active a[href="/Apps"]) #menu .nav-tile::-webkit-scrollbar,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowEnd {
+        flex: 0 0 auto !important;
+        margin-left: 0 !important;
+        height: 34px !important;
+        align-items: center !important;
+        align-self: center !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowMain {
+        height: 34px !important;
+        align-items: center !important;
+        align-self: center !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter,
+    body:has(#menu .nav-item.active a[href="/Apps"]) #sortIconArea,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .dockerSearch,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .templateSearch,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .ca_displayCount,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caInlineStripWrap,
+    body:has(#menu .nav-item.active a[href="/Apps"]) .caSearchRowEnd {
+        transform: translateY(1px) !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .dockerSearch {
+        transform: translateY(3px) !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .searchButton,
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter .caSearchModalIconControls {
+        display: none !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]).menuShowing #searchFilter,
+    body:has(#menu .nav-item.active a[href="/Apps"]).menuShowing .caSearchRowEnd {
+        display: flex !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]).menuShowing .searchAreaHolder .caCreditsInfo.menuShowing,
+    body:has(#menu .nav-item.active a[href="/Apps"]).menuShowing .searchAreaHolder .caSettingsGear.menuShowing {
+        display: flex !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]).menuShowing .ca_modal_overlay {
+        display: none !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea.menuShowing {
+        left: 175px !important;
+        right: 0 !important;
+        width: auto !important;
+        overflow-x: hidden !important;
     }
 }
 

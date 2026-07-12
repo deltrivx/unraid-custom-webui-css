@@ -494,6 +494,63 @@ span.inner { width: 137px !important; }
 #vmform .sectiontab { background: #fb7299 !important; }
 table.dashboard i.control { background: transparent !important; }
 
+/* -------------------- 17. 应用商店（Community Applications） -------------------- */
+.searchArea {
+    z-index: 6;
+    width: 100%;
+    position: sticky;
+    background: transparent !important;
+    top: var(--search-area-top);
+}
+.popupCloseArea {
+    position: fixed;
+    margin: -2rem 0 0 10px;
+    padding: 2rem 0 1rem;
+    width: 100%;
+    background: transparent !important;
+    z-index: 5;
+}
+.menuItems {
+    position: relative;
+    height: auto;
+    align-items: stretch;
+    width: 14rem;
+    z-index: 2;
+    background: transparent !important;
+}
+/* 标签页（Tab）样式 */
+div.tab [type="radio"]:checked + label { cursor: default; border: 0 !important; opacity: 1; }
+div.tab [type=radio] + label {
+    background: rgba(0, 0, 0, 0.35) !important;
+    opacity: 0.5;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+}
+div.tab [type=radio] + label:hover, div.tab [type=radio]:checked + label {
+    border-color: var(--accent-bg);
+    color: var(--text-hover);
+}
+/* 应用卡片 */
+.ca_holder {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+    transition: background 0.2s;
+}
+.ca_holder:hover { background: rgba(0, 0, 0, 0.45) !important; }
+.ca_templatesDisplay .ca_holderFav {
+    background: rgba(var(--accent), 0.7) !important;
+    color: var(--label) !important;
+}
+.ca_descriptionArea:hover, a.ca_repoPopup:hover { color: var(--btn-text-hover) !important; }
+.selectedMenu { color: rgb(var(--accent)) !important; }
+.hoverMenu { color: var(--link-hover) !important; }
+.sortIcons.enabledIcon { color: rgb(var(--accent)) !important; }
+.sortIcons.enabledIcon:hover { color: var(--link-hover) !important; }
+.sortIcons { color: var(--text) !important; }
+.sortIcons:hover { color: var(--text-hover) !important; }
+.pageSelected { color: rgb(var(--accent)) !important; }
+.pageNumber:hover { color: var(--accent-bg) !important; }
+.chartMenu:hover { color: var(--link-hover) !important; }
+
 /* -------------------- 18. 弹窗与对话框（SweetAlert, Lightbox） -------------------- */
 .sweet-alert, .sweet-alert .sa-icon.sa-success .sa-fix {
     background: rgba(0, 0, 0, 0.2) !important;
@@ -595,6 +652,7 @@ img#mycase {
     max-height: 128px !important;
     filter: drop-shadow(0 0 5px var(--btn));
 }
+.maxPerPage { background: transparent !important; }
 div.shade-black { background: transparent !important; }
 
 /* -------------------- 26. 滚动条美化（霓虹渐变） -------------------- */
@@ -1107,6 +1165,9 @@ body:has(#menu .nav-item.active) div.title {
 }
 
 body:has(#menu .nav-item.active) #template,
+body:has(#menu .nav-item.active) .ca_holder,
+body:has(#menu .nav-item.active) .ca_holderFav,
+body:has(#menu .nav-item.active) .ca_holderDocker,
 body:has(#menu .nav-item.active) .dockerHubHolder,
 body:has(#menu .nav-item.active) .docker_controls,
 body:has(#menu .nav-item.active) .ctrls,
@@ -1118,6 +1179,9 @@ body:has(#menu .nav-item.active) #displaybox {
     overflow: hidden !important;
 }
 
+body:has(#menu .nav-item.active) .ca_holder,
+body:has(#menu .nav-item.active) .ca_holderFav,
+body:has(#menu .nav-item.active) .ca_holderDocker,
 body:has(#menu .nav-item.active) .dockerHubHolder {
     background-clip: padding-box !important;
 }
@@ -1360,6 +1424,395 @@ body:has(#menu .nav-item.active a[href="/Users"]) .user-list:after {
         margin: 0 !important;
         white-space: nowrap !important;
     }
+}
+
+/* 35. Apps page: sidebar, search and app cards */
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder {
+    width: 100% !important;
+    max-width: 1920px !important;
+    height: 48px !important;
+    box-sizing: border-box !important;
+    margin: 10px auto 18px !important;
+    padding: 0 20px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    overflow: visible !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea {
+    width: auto !important;
+    height: 48px !important;
+    min-height: 48px !important;
+    max-height: 48px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 7px 10px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    flex-wrap: nowrap !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    white-space: nowrap !important;
+    position: relative !important;
+    top: 0 !important;
+    isolation: isolate !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    border-bottom-left-radius: 14px !important;
+    border-bottom-right-radius: 14px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    filter:
+        drop-shadow(0 6px 6px rgba(0,0,0,.28))
+        drop-shadow(0 14px 10px rgba(0,0,0,.18)) !important;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    border-radius: 14px !important;
+    background: rgba(20, 24, 34, 0.55) !important;
+    background-color: rgba(20, 24, 34, 0.55) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    clip-path: inset(0 round 14px) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea::-webkit-scrollbar {
+    display: none;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder .searchArea {
+    border-bottom-left-radius: 14px !important;
+    border-bottom-right-radius: 14px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter {
+    display: inline-flex !important;
+    align-items: center !important;
+    flex: 0 0 auto !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchBox {
+    width: 300px !important;
+    min-width: 300px !important;
+    height: 34px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 42px 0 12px !important;
+    top: auto !important;
+    left: auto !important;
+    border: 0 !important;
+    border-radius: 12px !important;
+    background: rgba(255,255,255,0.08) !important;
+    background-color: rgba(255,255,255,0.08) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    color: var(--text) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchSubmit {
+    width: 34px !important;
+    min-width: 34px !important;
+    height: 34px !important;
+    box-sizing: border-box !important;
+    margin: 0 0 0 -34px !important;
+    padding: 0 !important;
+    left: auto !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border-radius: 0 12px 12px 0 !important;
+    background: rgba(255,255,255,0.08) !important;
+    background-color: rgba(255,255,255,0.08) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchButton {
+    line-height: 1 !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea > *,
+body:has(#menu .nav-item.active a[href="/Apps"]) .maxPerPage,
+body:has(#menu .nav-item.active a[href="/Apps"]) .categoryLineNoMenu,
+body:has(#menu .nav-item.active a[href="/Apps"]) .sortIcons,
+body:has(#menu .nav-item.active a[href="/Apps"]) .pageNumber,
+body:has(#menu .nav-item.active a[href="/Apps"]) .pageSelected {
+    flex: 0 0 auto !important;
+    max-width: none !important;
+    white-space: nowrap !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems {
+    width: 148px !important;
+    box-sizing: border-box !important;
+    margin: 10px 0 0 0 !important;
+    padding: 8px !important;
+    position: relative !important;
+    isolation: isolate !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    border-radius: 14px !important;
+    border-bottom-left-radius: 14px !important;
+    border-bottom-right-radius: 14px !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    filter:
+        drop-shadow(0 6px 6px rgba(0,0,0,.28))
+        drop-shadow(0 14px 10px rgba(0,0,0,.18)) !important;
+    overflow: visible !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems::before {
+    content: "" !important;
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 0 !important;
+    border-radius: 14px !important;
+    background: rgba(20, 24, 34, 0.55) !important;
+    background-color: rgba(20, 24, 34, 0.55) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    clip-path: inset(0 round 14px) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems > * {
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .ca_display_area {
+    width: calc(100% - 20px) !important;
+    box-sizing: border-box !important;
+    margin-left: 10px !important;
+    margin-right: 10px !important;
+    position: relative !important;
+    align-items: stretch !important;
+    min-height: 0 !important;
+    height: auto !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 0 0 14px 14px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mobileMenu {
+    width: 148px !important;
+    min-width: 148px !important;
+    position: relative !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    border-radius: 14px !important;
+    overflow: visible !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
+    position: absolute !important;
+    top: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    left: 148px !important;
+    width: auto !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    align-self: stretch !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255,121,198,0.85) rgba(20,24,34,0.35) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #templates_content {
+    margin-bottom: 0 !important;
+    padding-bottom: 8px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea::-webkit-scrollbar {
+    width: 10px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea::-webkit-scrollbar-track {
+    background: rgba(20,24,34,0.35) !important;
+    border-radius: 999px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea::-webkit-scrollbar-thumb {
+    background: rgba(255,121,198,0.85) !important;
+    border-radius: 999px !important;
+    border: 2px solid rgba(20,24,34,0.35) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems ul,
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems li {
+    list-style: none !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .caMenuItem,
+body:has(#menu .nav-item.active a[href="/Apps"]) .categoryMenu,
+body:has(#menu .nav-item.active a[href="/Apps"]) .chartMenu {
+    width: 100% !important;
+    min-height: 30px !important;
+    box-sizing: border-box !important;
+    margin: 2px 0 !important;
+    padding: 7px 9px !important;
+    display: flex !important;
+    align-items: center !important;
+    border-radius: 10px !important;
+    background: transparent !important;
+    background-color: transparent !important;
+    line-height: 1.2 !important;
+    white-space: nowrap !important;
+    transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .caMenuItem:hover,
+body:has(#menu .nav-item.active a[href="/Apps"]) .categoryMenu:hover,
+body:has(#menu .nav-item.active a[href="/Apps"]) .chartMenu:hover,
+body:has(#menu .nav-item.active a[href="/Apps"]) .hoverMenu {
+    background: rgba(255,255,255,0.07) !important;
+    color: var(--text-hover) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .selectedMenu,
+body:has(#menu .nav-item.active a[href="/Apps"]) .chartMenu.selectedMenu {
+    background: rgba(255,255,255,0.10) !important;
+    color: var(--text-hover) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+@media (max-width: 900px) {
+    body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder {
+        margin: 8px 0 12px !important;
+        padding: 0 8px !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder::-webkit-scrollbar {
+        display: none;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea {
+        min-width: max-content !important;
+        padding: 7px 8px !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) #searchBox {
+        width: 300px !important;
+        min-width: 300px !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems {
+        flex: 0 0 148px !important;
+        width: 148px !important;
+        min-width: 148px !important;
+        top: auto !important;
+        margin: 8px 0 0 0 !important;
+        overflow: visible !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Apps"]) .ca_display_area {
+        width: calc(100% - 16px) !important;
+        margin-left: 8px !important;
+        margin-right: 8px !important;
+    }
+
+}
+
+/* 35.1 Apps page: tighten rendered menu items and card flow */
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea label,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea span,
+body:has(#menu .nav-item.active a[href="/Apps"]) .maxPerPage {
+    color: var(--text) !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .templateSearch,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .dockerSearch,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .maxPerPage {
+    min-height: 30px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .maxPerPage {
+    min-height: 28px !important;
+    height: 28px !important;
+    max-height: 28px !important;
+    box-sizing: border-box !important;
+    position: relative !important;
+    top: 0 !important;
+    margin: 0 !important;
+    padding: 0 13px !important;
+    justify-content: center !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,0.10) !important;
+    background-color: rgba(255,255,255,0.10) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    color: rgba(238,238,238,0.90) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    text-shadow: none !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems ul.caMenuItem {
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems li.caMenuItem,
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems li.categoryMenu,
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems li.chartMenu {
+    display: flex !important;
+    align-items: center !important;
+}
+
+/* 35.2 Apps page: soften search source toggle buttons */
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .dockerSearch,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .templateSearch {
+    min-height: 28px !important;
+    height: 28px !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    padding: 0 13px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    border: 1px solid rgba(255,255,255,0.12) !important;
+    border-radius: 999px !important;
+    background: rgba(255,255,255,0.10) !important;
+    background-color: rgba(255,255,255,0.10) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08) !important;
+    color: rgba(238,238,238,0.90) !important;
+    font-size: 12px !important;
+    font-weight: 500 !important;
+    line-height: 1 !important;
+    text-shadow: none !important;
+    vertical-align: middle !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .dockerSearch:hover,
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchArea .templateSearch:hover {
+    background: rgba(255,255,255,0.16) !important;
+    background-color: rgba(255,255,255,0.16) !important;
+    color: var(--text-hover) !important;
 }
 
 /* 36. Plugins and Main: compact plugin tabs, restore Array Operation layout */

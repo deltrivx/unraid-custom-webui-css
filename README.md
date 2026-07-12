@@ -2,7 +2,7 @@
 
 这是一个基于 **Custom WebUI CSS** 插件实现的 Unraid WebGUI 自定义主题。
 
-本主题基于 Unraid 7.3.2 WebGUI 界面适配制作，适用于 Custom WebUI CSS 插件部署。主题包含主样式、深色模式兼容样式与背景图片资源，主要优化顶部导航、模块圆角、玻璃拟态背景、小屏横向滚动以及设置、用户、应用等页面的视觉一致性，让 Unraid 后台界面在深色模式下更统一、更柔和。
+本主题基于 Unraid 7.3.2 WebGUI 界面适配制作，适用于 Custom WebUI CSS 插件部署。主题包含主样式、深色模式兼容样式与背景图片资源，主要优化顶部导航、模块圆角、玻璃拟态背景、小屏横向滚动以及设置、用户等页面的视觉一致性。最新版保留 Community Applications 的原生布局，避免与新版 Apps 页面重复定制。
 
 ## 效果预览
 
@@ -34,7 +34,25 @@
 bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
 ```
 
-安装完成后刷新 Unraid WebGUI 页面即可。
+在交互式终端中运行时，脚本会列出 `latest` 和历史时间版本供选择；通过管道或自动化环境执行时默认安装 `latest`。安装完成后刷新 Unraid WebGUI 页面即可。
+
+列出可用版本：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --list
+```
+
+指定版本进行非交互安装：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --version latest
+```
+
+例如安装旧版完整 Apps 定制：
+
+```bash
+bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --version 20260711-231949
+```
 
 ## 手动安装
 
@@ -45,11 +63,11 @@ mkdir -p /boot/config/plugins/custom.css/assets
 mkdir -p /usr/local/emhttp/plugins/custom.css/assets
 
 curl -fsSL -o /boot/config/plugins/custom.css/style.css \
-  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/style.css
+  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/versions/latest/style.css
 curl -fsSL -o /boot/config/plugins/custom.css/style-black.css \
-  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/style-black.css
+  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/versions/latest/style-black.css
 curl -fsSL -o /boot/config/plugins/custom.css/assets/background.jpg \
-  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/assets/background.jpg
+  https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/versions/latest/assets/background.jpg
 
 printf 'SERVICE="enabled"\n' > /boot/config/plugins/custom.css/custom.css.cfg
 
@@ -65,6 +83,8 @@ cp /boot/config/plugins/custom.css/assets/background.jpg /usr/local/emhttp/plugi
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
 ```
+
+历史版本不会被覆盖；版本列表记录在 `versions/index.json`。详细变更见 [CHANGELOG.md](CHANGELOG.md)。
 
 脚本只会覆盖本仓库管理的主题文件：
 
@@ -158,5 +178,9 @@ macOS: Command + Shift + R
 - `style-black.css`：黑色主题兼容/覆盖样式。
 - `assets/background.jpg`：主题背景图片。
 - `scripts/install.sh`：一键安装脚本。
+- `versions/latest/`：当前推荐版本。
+- `versions/<时间版本>/`：不可变历史版本归档。
+- `versions/index.json`：安装脚本使用的版本清单。
+- `CHANGELOG.md`：版本更新记录。
 - `docs/display-settings.md`：显示设置说明。
 - `docs/troubleshooting.md`：排错说明。

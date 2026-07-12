@@ -1362,6 +1362,88 @@ body:has(#menu .nav-item.active a[href="/Users"]) .user-list:after {
     }
 }
 
+/* Apps: keep the native layout, only clear the sticky navigation. */
+body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder {
+    top: 155px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #searchFilter {
+    border-radius: 10px !important;
+    overflow: hidden !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) #caInlineSearchBox {
+    border-radius: 10px !important;
+    box-sizing: border-box !important;
+    padding-left: 10px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .ca_display_area {
+    height: calc(100vh - 237px) !important;
+    min-height: 0 !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems {
+    top: 197px !important;
+    bottom: 40px !important;
+    height: auto !important;
+    max-height: none !important;
+    border-radius: 12px !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    box-sizing: border-box !important;
+    padding-top: 8px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems .caMenu > li.caMenuItem {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding-left: 14px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems .subCategory li.caMenuItem {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    padding-left: 22px !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems .caMenu > li:not([class]) {
+    box-sizing: border-box !important;
+    width: calc(100% - 28px) !important;
+    margin-left: 14px !important;
+    margin-right: 14px !important;
+}
+
+.Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .searchAreaHolder {
+    left: 50% !important;
+    width: calc(100% - 20px) !important;
+    max-width: 1900px !important;
+    transform: translateX(-50%) !important;
+}
+
+.Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .ca_display_area {
+    left: 50% !important;
+    width: 100% !important;
+    max-width: 1920px !important;
+    transform: translateX(-50%) !important;
+}
+
+.Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .menuItems {
+    left: max(10px, calc((100vw - 1920px) / 2 + 10px)) !important;
+}
+
+.Theme--width-boxed body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
+    right: 0 !important;
+    width: auto !important;
+}
+
+body:has(#menu .nav-item.active a[href="/Apps"]) .mainArea {
+    height: 100% !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    transform: translateY(26px) !important;
+}
+
 /* 36. Plugins and Main: compact plugin tabs, restore Array Operation layout */
 body:has(#menu .nav-item.active a[href="/Plugins"]) nav.tabs {
     min-height: 0 !important;

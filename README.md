@@ -34,25 +34,7 @@
 bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh)
 ```
 
-在交互式终端中运行时，脚本首先提供“一键升级到最新版”“手动选择版本”“查看版本列表”三个操作；通过管道或自动化环境执行时默认安装 `latest`。安装完成后刷新 Unraid WebGUI 页面即可。
-
-列出可用版本：
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --list
-```
-
-指定版本进行非交互安装：
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --version latest
-```
-
-例如安装旧版完整 Apps 定制：
-
-```bash
-bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui-css/main/scripts/install.sh) --version 20260711-231949
-```
+脚本会提供一个统一菜单，可直接升级到最新版、手动选择版本、查看版本或退出。安装、更新和回滚都使用上面同一条命令，不需要记忆其他参数或命令。
 
 ## 手动安装
 
@@ -179,7 +161,7 @@ macOS: Command + Shift + R
 - `assets/background.jpg`：主题背景图片。
 - `scripts/install.sh`：一键安装脚本。
 - `versions/latest/`：当前推荐版本。
-- `versions/<时间版本>/`：不可变历史版本归档。
+- `versions/v*`：语义化历史版本归档。
 - `versions/index.json`：安装脚本使用的版本清单。
 - `CHANGELOG.md`：版本更新记录。
 - `docs/display-settings.md`：显示设置说明。

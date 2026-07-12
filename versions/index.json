@@ -4,28 +4,23 @@
   "versions": [
     {
       "id": "latest",
-      "label": "Latest - one-command interactive upgrade",
-      "released_at": "2026-07-12T16:26:52+08:00"
+      "label": "Latest (v1.2.0)",
+      "released_at": "2026-07-12"
     },
     {
-      "id": "20260712-162652",
-      "label": "One-command interactive upgrade",
-      "released_at": "2026-07-12T16:26:52+08:00"
+      "id": "v1.2.0",
+      "label": "One-command installer",
+      "released_at": "2026-07-12"
     },
     {
-      "id": "20260712-162005",
-      "label": "Interactive upgrade workflow",
-      "released_at": "2026-07-12T16:20:05+08:00"
-    },
-    {
-      "id": "20260712-161553",
+      "id": "v1.1.0",
       "label": "Unraid 7.3.2 Apps compatibility",
-      "released_at": "2026-07-12T16:15:53+08:00"
+      "released_at": "2026-07-12"
     },
     {
-      "id": "20260711-231949",
+      "id": "v1.0.0",
       "label": "Legacy full Apps customization",
-      "released_at": "2026-07-11T23:19:49+08:00"
+      "released_at": "2026-07-11"
     }
   ]
 }

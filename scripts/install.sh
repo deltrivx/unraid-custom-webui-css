@@ -6,14 +6,6 @@ PERSIST_DIR="/boot/config/plugins/custom.css"
 RUNTIME_DIR="/usr/local/emhttp/plugins/custom.css"
 VERSION=""
 
-usage() {
-  cat <<'EOF'
-Usage: install.sh [--version VERSION] [--list] [--help]
-
-Without arguments, an interactive action menu is shown when a terminal is available.
-EOF
-}
-
 fetch_index() {
   curl -fsSL "$REPO_RAW/versions/index.json"
 }
@@ -67,25 +59,19 @@ EOF
   esac
 }
 
-while [ "$#" -gt 0 ]; do
-  case "$1" in
-    --version) [ "$#" -ge 2 ] || { usage >&2; exit 64; }; VERSION=$2; shift 2 ;;
-    --list) list_versions; exit 0 ;;
-    --help|-h) usage; exit 0 ;;
-    *) usage >&2; exit 64 ;;
-  esac
-done
+[ "$#" -eq 0 ] || {
+  echo "This installer uses one interactive command and accepts no arguments." >&2
+  exit 64
+}
 
 command -v curl >/dev/null 2>&1 || { echo "curl is required" >&2; exit 69; }
 command -v jq >/dev/null 2>&1 || { echo "jq is required" >&2; exit 69; }
 
-if [ -z "$VERSION" ]; then
-  if [ -t 0 ]; then
-    select_action
-  else
-    VERSION=latest
-  fi
+if [ ! -t 0 ]; then
+  echo "Run the installer in an interactive Unraid terminal." >&2
+  exit 64
 fi
+select_action
 
 index=$(fetch_index)
 printf '%s' "$index" | jq -e --arg version "$VERSION" \

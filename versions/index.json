@@ -1,20 +1,24 @@
 {
   "schema": 1,
   "default": "latest",
+  "latest_version": "v1.2.0",
   "versions": [
     {
       "id": "latest",
-      "label": "latest + v1.2.0",
+      "label": "最新版 v1.2.0",
+      "channel": "latest",
       "released_at": "2026-07-12"
     },
     {
       "id": "v1.1.0",
-      "label": "Unraid 7.3.2 Apps compatibility",
+      "label": "Unraid 7.3.2 应用页面兼容",
+      "channel": "history",
       "released_at": "2026-07-12"
     },
     {
       "id": "v1.0.0",
-      "label": "Legacy full Apps customization",
+      "label": "旧版应用页面完整定制",
+      "channel": "history",
       "released_at": "2026-07-11"
     }
   ]

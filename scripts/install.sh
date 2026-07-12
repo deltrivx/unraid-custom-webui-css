@@ -11,24 +11,19 @@ fetch_index() {
 }
 
 list_versions() {
-  fetch_index | jq -r '.versions[] | "\(.id)\t\(.label)\t\(.released_at)"'
+  fetch_index | jq -r '.versions[] | "\(.label)\t\(.released_at)"'
 }
 
 select_version() {
   index=$(fetch_index)
-  count=$(printf '%s' "$index" | jq '.versions | length')
-  printf 'Available theme versions:\n'
+  count=$(printf '%s' "$index" | jq '[.versions[] | select(.channel == "history")] | length')
+  printf '历史版本：\n'
   i=0
   while [ "$i" -lt "$count" ]; do
-    id=$(printf '%s' "$index" | jq -r ".versions[$i].id")
-    label=$(printf '%s' "$index" | jq -r ".versions[$i].label")
-    released=$(printf '%s' "$index" | jq -r ".versions[$i].released_at")
-    if [ "$id" = latest ]; then
-      display="$label"
-    else
-      display="$id + $label"
-    fi
-    printf '  %s) %s (%s)\n' "$((i + 1))" "$display" "$released"
+    id=$(printf '%s' "$index" | jq -r "[.versions[] | select(.channel == \"history\")][$i].id")
+    label=$(printf '%s' "$index" | jq -r "[.versions[] | select(.channel == \"history\")][$i].label")
+    released=$(printf '%s' "$index" | jq -r "[.versions[] | select(.channel == \"history\")][$i].released_at")
+    printf '  %s) %s - %s (%s)\n' "$((i + 1))" "$id" "$label" "$released"
     i=$((i + 1))
   done
   printf 'Select version [1]: '
@@ -41,16 +36,16 @@ select_version() {
     echo "Selection out of range" >&2
     exit 64
   }
-  VERSION=$(printf '%s' "$index" | jq -r ".versions[$((choice - 1))].id")
+  VERSION=$(printf '%s' "$index" | jq -r "[.versions[] | select(.channel == \"history\")][$((choice - 1))].id")
 }
 
 select_action() {
   cat <<'EOF'
-Custom WebUI CSS theme
-  1) Upgrade installed theme to latest
-  2) Choose a version manually
-  3) List available versions
-  4) Exit
+Custom WebUI CSS 主题
+  1) 升级到最新版（v1.2.0）
+  2) 安装历史版本
+  3) 查看全部版本
+  4) 退出
 EOF
   printf 'Select action [1]: '
   read -r action

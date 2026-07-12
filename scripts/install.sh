@@ -8,8 +8,12 @@ DYNAMIX_CFG="/boot/config/plugins/dynamix/dynamix.cfg"
 STATE_FILE="$PERSIST_DIR/unraid-custom-webui-css.state"
 VERSION=""
 
+download() {
+  curl -4 -fsSL --connect-timeout 10 --max-time 180 --retry 2 "$@"
+}
+
 fetch_index() {
-  curl -fsSL "$REPO_RAW/versions/index.json"
+  download "$REPO_RAW/versions/index.json"
 }
 
 read_display_value() {
@@ -63,9 +67,9 @@ install_version() {
   trap 'rm -rf "$tmp"' EXIT INT TERM
 
   mkdir -p "$tmp/assets" "$PERSIST_DIR/assets" "$RUNTIME_DIR/assets"
-  curl -fsSL -o "$tmp/style.css" "$base/style.css"
-  curl -fsSL -o "$tmp/style-black.css" "$base/style-black.css"
-  curl -fsSL -o "$tmp/assets/background.jpg" "$base/assets/background.jpg"
+  download -o "$tmp/style.css" "$base/style.css"
+  download -o "$tmp/style-black.css" "$base/style-black.css"
+  download -o "$tmp/assets/background.jpg" "$base/assets/background.jpg"
 
   install -m 0644 "$tmp/style.css" "$PERSIST_DIR/style.css"
   install -m 0644 "$tmp/style-black.css" "$PERSIST_DIR/style-black.css"

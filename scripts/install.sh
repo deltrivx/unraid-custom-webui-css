@@ -8,10 +8,9 @@ VERSION=""
 
 usage() {
   cat <<'EOF'
-Usage: install.sh [--upgrade] [--version VERSION] [--list] [--help]
+Usage: install.sh [--version VERSION] [--list] [--help]
 
 Without arguments, an interactive action menu is shown when a terminal is available.
-Use --upgrade to update an existing installation directly to latest.
 EOF
 }
 
@@ -70,7 +69,6 @@ EOF
 
 while [ "$#" -gt 0 ]; do
   case "$1" in
-    --upgrade) VERSION=latest; shift ;;
     --version) [ "$#" -ge 2 ] || { usage >&2; exit 64; }; VERSION=$2; shift 2 ;;
     --list) list_versions; exit 0 ;;
     --help|-h) usage; exit 0 ;;

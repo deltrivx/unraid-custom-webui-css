@@ -1,5 +1,14 @@
 # Changelog
 
+## latest / 20260712-162652 - 2026-07-12
+
+### Installer correction
+
+- Kept the original one-command installer as the only documented upgrade entry point.
+- The original command now opens an action menu where option 1 upgrades directly to `latest` and option 2 opens manual version selection.
+- Removed the additional `--upgrade` command and its README example to avoid creating a second user workflow.
+- Preserved `--version`, `--list` and `--help` as advanced compatibility and automation options.
+
 ## latest / 20260712-162005 - 2026-07-12
 
 ### Installer workflow
@@ -8,7 +17,7 @@
 - Added a one-step "Upgrade installed theme to latest" option as the default action.
 - Kept manual version selection as a separate option for rollbacks and compatibility testing.
 - Added an in-menu version list and a clean exit option.
-- Added `--upgrade` for unattended upgrades while preserving `--version`, `--list` and `--help`.
+- Kept the original one-command installer as the single user entry point; upgrades are selected from its interactive menu.
 - Reused the same validated download and installation path for upgrades and fresh installs, so persistent and runtime theme files remain synchronized.
 
 ## latest / 20260712-161553 - 2026-07-12

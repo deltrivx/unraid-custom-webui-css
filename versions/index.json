@@ -8,6 +8,11 @@
       "released_at": "2026-07-12"
     },
     {
+      "id": "20260712-161553",
+      "label": "Unraid 7.3.2 Apps compatibility",
+      "released_at": "2026-07-12T16:15:53+08:00"
+    },
+    {
       "id": "20260711-231949",
       "label": "Legacy full Apps customization",
       "released_at": "2026-07-11T23:19:49+08:00"

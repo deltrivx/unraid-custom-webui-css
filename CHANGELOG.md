@@ -1,6 +1,6 @@
 # Changelog
 
-## latest - 2026-07-12
+## latest / 20260712-161553 - 2026-07-12
 
 ### Apps page compatibility
 

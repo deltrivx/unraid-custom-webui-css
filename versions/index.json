@@ -1,11 +1,11 @@
 {
   "schema": 1,
-  "default": "latest",
+  "default": "v1.2.0",
   "latest_version": "v1.2.0",
   "versions": [
     {
-      "id": "latest",
-      "label": "最新版 v1.2.0",
+      "id": "v1.2.0",
+      "label": "单命令安装、升级和回滚",
       "channel": "latest",
       "released_at": "2026-07-12"
     },

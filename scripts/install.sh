@@ -51,7 +51,7 @@ EOF
   read -r action
   action=${action:-1}
   case "$action" in
-    1) VERSION=latest ;;
+    1) VERSION=$(fetch_index | jq -r '.latest_version') ;;
     2) select_version ;;
     3) list_versions; exit 0 ;;
     4) exit 0 ;;

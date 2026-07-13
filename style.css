@@ -2030,6 +2030,26 @@ body:has(#menu .nav-item.active a[href="/Main"]) form[name="arrayOps"] ~ table.A
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
 }
 
+/* 38. Main mobile: reserve a full column for Array Operation buttons */
+@media (max-width: 900px) {
+    body:has(#menu .nav-item.active a[href="/Main"]) table.ArrayOperation-Table tr > td:nth-child(1) {
+        width: 25% !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Main"]) table.ArrayOperation-Table tr > td:nth-child(2) {
+        width: 30% !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Main"]) table.ArrayOperation-Table tr > td:nth-child(3) {
+        width: 45% !important;
+    }
+
+    body:has(#menu .nav-item.active a[href="/Main"]) #remotes-buttons {
+        width: calc(100% - 10px) !important;
+        transform: translateX(10px) !important;
+    }
+}
+
 /* 37. Code editor compatibility: keep global form styling out of editor input layers */
 .ace_editor,
 .CodeMirror,

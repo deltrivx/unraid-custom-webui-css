@@ -1,17 +1,17 @@
 {
   "schema": 1,
-  "default": "v1.5.1",
-  "latest_version": "v1.5.1",
+  "default": "v1.5.2",
+  "latest_version": "v1.5.2",
   "versions": [
     {
-      "id": "v1.5.1",
-      "label": "安装脚本显示设置补全",
+      "id": "v1.5.2",
+      "label": "移动端主界面与滚动条优化",
       "channel": "latest",
       "released_at": "2026-07-13"
     },
     {
-      "id": "v1.5.0",
-      "label": "应用页面移动端工具栏完善",
+      "id": "v1.5.1",
+      "label": "安装脚本显示设置补全",
       "channel": "history",
       "released_at": "2026-07-13"
     },

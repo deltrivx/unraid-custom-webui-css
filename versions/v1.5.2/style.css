@@ -2048,6 +2048,25 @@ body:has(#menu .nav-item.active a[href="/Main"]) form[name="arrayOps"] ~ table.A
         width: calc(100% - 10px) !important;
         transform: translateX(10px) !important;
     }
+
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) #menu .nav-tile,
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) .TableContainer,
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) #copyright,
+    body:has(#menu .nav-item.active a[href="/Main"]) .content,
+    body:has(#menu .nav-item.active a[href="/Plugins"]) nav.tabs .tabs-container {
+        scrollbar-width: none !important;
+        -ms-overflow-style: none !important;
+    }
+
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) #menu .nav-tile::-webkit-scrollbar,
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) .TableContainer::-webkit-scrollbar,
+    body:not(:has(#menu .nav-item.active a[href="/Apps"])) #copyright::-webkit-scrollbar,
+    body:has(#menu .nav-item.active a[href="/Main"]) .content::-webkit-scrollbar,
+    body:has(#menu .nav-item.active a[href="/Plugins"]) nav.tabs .tabs-container::-webkit-scrollbar {
+        display: none !important;
+        width: 0 !important;
+        height: 0 !important;
+    }
 }
 
 /* 37. Code editor compatibility: keep global form styling out of editor input layers */

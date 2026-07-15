@@ -6,6 +6,9 @@ PERSIST_DIR="/boot/config/plugins/custom.css"
 RUNTIME_DIR="/usr/local/emhttp/plugins/custom.css"
 DYNAMIX_CFG="/boot/config/plugins/dynamix/dynamix.cfg"
 STATE_FILE="$PERSIST_DIR/unraid-custom-webui-css.state"
+CA_PAGE="/usr/local/emhttp/plugins/community.applications/Apps.page"
+CA_MARK_START='<!-- unraid-custom-webui-css:apps-enhancement:start -->'
+CA_MARK_END='<!-- unraid-custom-webui-css:apps-enhancement:end -->'
 VERSION=""
 
 download() {
@@ -56,6 +59,30 @@ restore_display_settings() {
   rm -f "$STATE_FILE"
 }
 
+remove_apps_enhancement() {
+  if [ -f "$CA_PAGE" ]; then
+    sed -i "\|$CA_MARK_START|,\|$CA_MARK_END|d" "$CA_PAGE"
+  fi
+  rm -f "$PERSIST_DIR/assets/apps-enhancement.js" \
+    "$RUNTIME_DIR/assets/apps-enhancement.js"
+}
+
+install_apps_enhancement() {
+  [ -f "$CA_PAGE" ] || {
+    echo "未检测到 Community Applications，跳过应用页增强。"
+    return 0
+  }
+
+  remove_apps_enhancement
+  install -m 0644 "$tmp/apps-enhancement.js" "$PERSIST_DIR/assets/apps-enhancement.js"
+  install -m 0644 "$PERSIST_DIR/assets/apps-enhancement.js" "$RUNTIME_DIR/assets/apps-enhancement.js"
+  cat >> "$CA_PAGE" <<EOF
+$CA_MARK_START
+<script src="/plugins/custom.css/assets/apps-enhancement.js?v=$VERSION"></script>
+$CA_MARK_END
+EOF
+}
+
 install_version() {
   index=$(fetch_index)
   printf '%s' "$index" | jq -e --arg version "$VERSION" \
@@ -72,6 +99,11 @@ install_version() {
   download -o "$tmp/style.css" "$base/style.css"
   download -o "$tmp/style-black.css" "$base/style-black.css"
   download -o "$tmp/assets/background.jpg" "$base/assets/background.jpg"
+  apps_enhancement=$(printf '%s' "$index" | jq -r --arg version "$VERSION" \
+    '.versions[] | select(.id == $version) | .apps_enhancement // false')
+  if [ "$apps_enhancement" = "true" ]; then
+    download -o "$tmp/apps-enhancement.js" "$base/apps-enhancement.js"
+  fi
 
   install -m 0644 "$tmp/style.css" "$PERSIST_DIR/style.css"
   install -m 0644 "$tmp/style-black.css" "$PERSIST_DIR/style-black.css"
@@ -81,6 +113,10 @@ install_version() {
   install -m 0644 "$PERSIST_DIR/style.css" "$RUNTIME_DIR/style.css"
   install -m 0644 "$PERSIST_DIR/style-black.css" "$RUNTIME_DIR/style-black.css"
   install -m 0644 "$PERSIST_DIR/assets/background.jpg" "$RUNTIME_DIR/assets/background.jpg"
+  remove_apps_enhancement
+  if [ "$apps_enhancement" = "true" ]; then
+    install_apps_enhancement
+  fi
   apply_display_settings
 
   echo "主题 $VERSION 已安装。显示主题和标题背景已设为黑色，页眉文字已设为白色。"
@@ -119,6 +155,7 @@ uninstall_theme() {
     "$PERSIST_DIR/assets/background.jpg"
   rm -f "$RUNTIME_DIR/style.css" "$RUNTIME_DIR/style-black.css" \
     "$RUNTIME_DIR/assets/background.jpg"
+  remove_apps_enhancement
   printf 'SERVICE="disabled"\n' > "$PERSIST_DIR/custom.css.cfg"
   restore_display_settings
   rmdir "$PERSIST_DIR/assets" "$RUNTIME_DIR/assets" 2>/dev/null || true

@@ -29,6 +29,8 @@ bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui
 3. 一键卸载主题：删除主题文件、禁用 Custom WebUI CSS，并恢复安装前的显示设置。
 4. 退出。
 
+安装 `v1.6.0` 及后续支持版本时，脚本还会安装独立的应用页增强文件，用于新版 Community Applications 的侧栏和搜索建议兼容。脚本不会覆盖完整 CA 页面，只插入一段带标记的加载引用；重复升级会自动去重，回滚历史版本或卸载主题时会自动移除。
+
 ## 自动显示设置
 
 安装任意版本时，脚本会自动执行 README 原先要求用户手动完成的显示设置：
@@ -49,10 +51,11 @@ Header custom background color: #000000
 ├── style.css
 ├── style-black.css
 └── assets/
-    └── background.jpg
+    ├── background.jpg
+    └── apps-enhancement.js
 ```
 
-脚本同步维护持久目录与 WebGUI 运行目录，只覆盖本仓库管理的三个主题文件。
+脚本同步维护持久目录与 WebGUI 运行目录，只管理本仓库的主题与增强文件。应用页增强仅在版本索引标记支持时启用；安装历史版本会自动撤销。
 
 ## 版本管理
 
@@ -84,11 +87,16 @@ ls -lh /usr/local/emhttp/plugins/custom.css/assets/background.jpg
 
 重新执行同一条一键命令，选择 `3) 一键卸载主题`。无需使用额外命令。
 
+### 更新 Community Applications 后增强失效
+
+CA 更新可能重建 `/usr/local/emhttp/plugins/community.applications/Apps.page`。重新执行同一条一键命令并选择 `1) 一键安装 / 升级最新版`，脚本会重新添加唯一的增强加载标记。
+
 ## 文件说明
 
 - `style.css`：主题主样式。
 - `style-black.css`：黑色主题兼容样式。
 - `assets/background.jpg`：主题背景。
+- `apps-enhancement.js`：新版 Community Applications 页面行为增强。
 - `scripts/install.sh`：统一交互脚本。
 - `versions/index.json`：版本清单。
 - `CHANGELOG.md`：中文更新日志。

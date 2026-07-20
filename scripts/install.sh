@@ -83,21 +83,22 @@ restore_display_settings() {
 }
 
 ask_yn() {
-  # $1 title multi-line help already printed; prompt ends with [Y/n]
+  # Prompt on stderr so command substitution only captures yes/no.
+  # $1 is the interactive prompt text (usually ends with [Y/n]：)
   prompt=$1
   attempt=0
   while [ "$attempt" -lt 2 ]; do
-    printf '%s' "$prompt"
+    printf '%s' "$prompt" >&2
     read -r ans || ans=""
     ans=$(printf '%s' "$ans" | tr '[:upper:]' '[:lower:]' | tr -d '[:space:]')
     case "$ans" in
-      ''|y|yes) echo yes; return 0 ;;
-      n|no) echo no; return 0 ;;
+      ''|y|yes) printf '%s\n' yes; return 0 ;;
+      n|no) printf '%s\n' no; return 0 ;;
     esac
-    echo "请输入 Y 或 N。"
+    printf '%s\n' "请输入 Y 或 N。" >&2
     attempt=$((attempt + 1))
   done
-  echo yes
+  printf '%s\n' yes
 }
 
 prompt_optional_components() {

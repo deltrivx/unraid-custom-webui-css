@@ -29,7 +29,12 @@ bash <(curl -fsSL https://raw.githubusercontent.com/deltrivx/unraid-custom-webui
 3. 一键卸载主题：删除主题文件、禁用 Custom WebUI CSS，并恢复安装前的显示设置。
 4. 退出。
 
-安装 `v1.6.0` 及后续支持版本时，脚本还会安装独立的应用页增强文件，用于新版 Community Applications 的侧栏和搜索建议兼容。脚本不会覆盖完整 CA 页面，只插入一段带标记的加载引用；重复升级会自动去重，回滚历史版本或卸载主题时会自动移除。
+安装 **最新版** 时会额外询问两项可选组件（直接回车 = 安装）：
+
+- 是否安装粒子特效：安装更好看；取消则页面更轻、更流畅。
+- 是否安装胡桃吉祥物：安装后有吉祥物陪伴；取消则少加载大图、略更流畅。
+
+历史版本安装不会弹出上述选项。安装 `v1.6.0` 及后续支持版本时，脚本还会安装独立的应用页增强文件 `apps-enhancement.js`（侧栏、路由隔离、搜索建议）。脚本不会覆盖完整 CA 页面，优先向 Custom WebUI CSS Loader 注入带标记的脚本引用；重复升级会自动去重，回滚历史版本或卸载主题时会自动移除。
 
 ## 自动显示设置
 
@@ -52,7 +57,8 @@ Header custom background color: #000000
 ├── style-black.css
 └── assets/
     ├── background.jpg
-    └── apps-enhancement.js
+    ├── apps-enhancement.js
+    └── hutao.gif          # 可选（最新版安装胡桃时）
 ```
 
 脚本同步维护持久目录与 WebGUI 运行目录，只管理本仓库的主题与增强文件。应用页增强仅在版本索引标记支持时启用；安装历史版本会自动撤销。
@@ -96,7 +102,8 @@ CA 更新可能重建 `/usr/local/emhttp/plugins/community.applications/Apps.pag
 - `style.css`：主题主样式。
 - `style-black.css`：黑色主题兼容样式。
 - `assets/background.jpg`：主题背景。
-- `apps-enhancement.js`：新版 Community Applications 页面行为增强。
-- `scripts/install.sh`：统一交互脚本。
+- `assets/hutao.gif`：胡桃吉祥物（可选组件）。
+- `apps-enhancement.js`：应用页增强（路由隔离、侧栏、搜索建议）。
+- `scripts/install.sh`：统一交互脚本（最新版支持粒子/胡桃可选安装）。
 - `versions/index.json`：版本清单。
 - `CHANGELOG.md`：中文更新日志。

@@ -4,7 +4,7 @@
  * Do NOT use body:has(.../Apps) — it re-evaluates on every scroll site-wide.
  *
  * v1.7.1 perf (visual parity):
- * - Dashboard: 3-layer static drop-shadow modules; chrome uses box-shadow; freeze particles on dashboard
+ * - Dashboard: 3-layer static drop-shadow modules; top nav keeps 2-layer drop-shadow; freeze particles on dashboard
  * - Apps PC: left menu height-matched to mainArea with independent vertical scroll (mobile unchanged)
  * - CA 2026.07.x: Awesomplete suggestions + nested subCategory + loader JS reinject
  * - Viewport wallpaper on html (cover + fixed + black fallback); no short-body white gaps
@@ -1047,11 +1047,10 @@ nav.tabs {
     padding: 6px !important;
     margin-bottom: 14px !important;
     border: 0 !important;
-    filter: none !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.10),
-        0 6px 10px rgba(0,0,0,.28),
-        0 14px 18px rgba(0,0,0,.18) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    filter:
+        drop-shadow(0 5px 5px rgba(0,0,0,.30))
+        drop-shadow(0 14px 12px rgba(0,0,0,.18));
 }
 
 nav.tabs .tabs-container {
@@ -1095,12 +1094,10 @@ nav.tabs button[role="tab"][aria-selected="true"] {
     background-color: rgba(20, 24, 34, 0.55) !important;
     border: 0 !important;
     border-radius: 14px !important;
-    /* sticky 导航用 box-shadow，避免滚动时反复合成 filter */
-    filter: none !important;
-    box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.10),
-        0 6px 10px rgba(0,0,0,.28),
-        0 14px 18px rgba(0,0,0,.18) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
+    filter:
+        drop-shadow(0 5px 5px rgba(0,0,0,.30))
+        drop-shadow(0 14px 12px rgba(0,0,0,.18)) !important;
 }
 
 #menu:before,

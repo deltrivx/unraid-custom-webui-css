@@ -5,7 +5,7 @@
   "versions": [
     {
       "id": "v1.7.1",
-      "label": "仪表盘深度增强、滚动性能优化、CA 2026.07 对齐",
+      "label": "仪表盘深度与性能、CA 对齐、PC 侧栏可滚动",
       "channel": "latest",
       "released_at": "2026-07-23",
       "apps_enhancement": true,

@@ -5,6 +5,7 @@
  *
  * v1.7.1 perf (visual parity):
  * - Dashboard: 3-layer static drop-shadow modules; chrome uses box-shadow; freeze particles on dashboard
+ * - Apps PC: left menu height-matched to mainArea with independent vertical scroll (mobile unchanged)
  * - CA 2026.07.x: Awesomplete suggestions + nested subCategory + loader JS reinject
  * - Viewport wallpaper on html (cover + fixed + black fallback); no short-body white gaps
  * - Particle layer: transform-only drift, isolated compositing
@@ -2331,29 +2332,35 @@ body.ucwc-apps .searchAreaHolder {
         width: calc(100% - 20px) !important;
         margin: 0 10px 12px !important;
         padding: 0 !important;
+        /* 与视口可用高度对齐，左右栏同高、各自滚动 */
         min-height: calc(100vh - 220px) !important;
-        height: auto !important;
+        height: calc(100dvh - 220px) !important;
+        max-height: calc(100dvh - 220px) !important;
         z-index: 1 !important;
-        overflow: visible !important;
+        overflow: hidden !important;
         background: transparent !important;
     }
 
-    /* PC left sidebar: ALWAYS visible (CA closeMenu must not hide it) */
+    /* PC left sidebar: always visible, height-matched to mainArea, independent scroll */
     body.ucwc-apps .mobileMenu,
     body.ucwc-apps #mobileMenu {
         display: block !important;
         visibility: visible !important;
         opacity: 1 !important;
         pointer-events: auto !important;
-        position: relative !important;
-        float: left !important;
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
+        float: none !important;
         width: 148px !important;
         min-width: 148px !important;
         max-width: 148px !important;
         height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
+        max-height: 100% !important;
+        overflow: hidden !important;
         z-index: 3 !important;
+        box-sizing: border-box !important;
     }
 
     body.ucwc-apps .menuItems {
@@ -2362,13 +2369,33 @@ body.ucwc-apps .searchAreaHolder {
         opacity: 1 !important;
         pointer-events: auto !important;
         margin-top: 0 !important;
+        margin-bottom: 0 !important;
         position: relative !important;
         z-index: 3 !important;
         width: 148px !important;
         min-width: 148px !important;
-        height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
+        height: 100% !important;
+        max-height: 100% !important;
+        overflow-x: hidden !important;
+        overflow-y: auto !important;
+        overscroll-behavior: contain !important;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin !important;
+        scrollbar-color: rgba(255,121,198,0.75) rgba(20,24,34,0.35) !important;
+        box-sizing: border-box !important;
+    }
+
+    body.ucwc-apps .menuItems::-webkit-scrollbar {
+        width: 8px !important;
+    }
+    body.ucwc-apps .menuItems::-webkit-scrollbar-track {
+        background: rgba(20,24,34,0.35) !important;
+        border-radius: 999px !important;
+    }
+    body.ucwc-apps .menuItems::-webkit-scrollbar-thumb {
+        background: rgba(255,121,198,0.75) !important;
+        border-radius: 999px !important;
+        border: 2px solid rgba(20,24,34,0.35) !important;
     }
 
     body.ucwc-apps.menuHidden .mobileMenu,
@@ -2384,8 +2411,11 @@ body.ucwc-apps .searchAreaHolder {
         width: 148px !important;
         min-width: 148px !important;
         height: auto !important;
-        max-height: none !important;
-        overflow: visible !important;
+        max-height: 100% !important;
+        overflow: hidden !important;
+        top: 0 !important;
+        left: 0 !important;
+        bottom: 0 !important;
     }
 
     body.ucwc-apps .mainArea {
@@ -2396,7 +2426,7 @@ body.ucwc-apps .searchAreaHolder {
         bottom: 0 !important;
         width: auto !important;
         height: auto !important;
-        min-height: calc(100vh - 220px) !important;
+        min-height: 0 !important;
         max-height: none !important;
         margin: 0 !important;
         padding: 4px 8px 16px 12px !important;

@@ -1,5 +1,5 @@
 /*! apps-enhancement.js
- * unraid-custom-webui-css v1.7.1-ca-align
+ * unraid-custom-webui-css v1.7.1-dash-perf
  * - body.ucwc-<route> class sync (Apps isolation / page-scoped CSS)
  * - Apps mobile/desktop menu show/close patch
  * - CA Awesomplete search suggestions: body mount + rAF position
@@ -395,16 +395,46 @@
     }, 100);
   }
 
+  var suggestDomObs = null;
+
   function bootSuggestionObserver() {
     if (!window.MutationObserver) return;
-    try {
-      var obs = new MutationObserver(function () {
-        if (!isAppsPage()) return;
-        if (searchBox() && !searchBox().__ucwcSuggestBound) bootSuggestions();
-        if (suggestionList()) schedulePositionSuggestions();
-      });
-      obs.observe(document.documentElement, { childList: true, subtree: true });
-    } catch (e) {}
+    function ensureObs() {
+      if (!isAppsPage()) {
+        if (suggestDomObs) {
+          try { suggestDomObs.disconnect(); } catch (e) {}
+          suggestDomObs = null;
+        }
+        return;
+      }
+      if (suggestDomObs) return;
+      try {
+        suggestDomObs = new MutationObserver(function () {
+          if (!isAppsPage()) return;
+          if (searchBox() && !searchBox().__ucwcSuggestBound) bootSuggestions();
+          if (suggestionList()) schedulePositionSuggestions();
+        });
+        /* Only watch Apps shell, not the entire document tree */
+        var root =
+          document.querySelector(".searchAreaHolder") ||
+          document.querySelector(".ca_display_area") ||
+          document.getElementById("template") ||
+          document.body;
+        suggestDomObs.observe(root, { childList: true, subtree: true });
+      } catch (e) {}
+    }
+    ensureObs();
+    /* re-evaluate when route class changes */
+    var prev = syncRouteClass;
+    /* hook after route sync via short interval only until first apps visit is expensive -
+       instead re-check on scheduleSync path: patch syncRouteClass callers already call bootSuggestions.
+       Also re-run ensureObs on popstate/click via existing scheduleSync after sync. */
+    var _origSync = syncRouteClass;
+    syncRouteClass = function () {
+      var r = _origSync.apply(this, arguments);
+      ensureObs();
+      return r;
+    };
   }
 
   function bootTabVisibility() {

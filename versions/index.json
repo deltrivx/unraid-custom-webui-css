@@ -5,7 +5,7 @@
   "versions": [
     {
       "id": "v1.7.1",
-      "label": "性能折中阴影、CA 2026.07 对齐、顶部导航滚动条隐藏",
+      "label": "仪表盘深度增强、滚动性能优化、CA 2026.07 对齐",
       "channel": "latest",
       "released_at": "2026-07-23",
       "apps_enhancement": true,

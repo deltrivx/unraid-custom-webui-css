@@ -4,7 +4,7 @@
  * Do NOT use body:has(.../Apps) — it re-evaluates on every scroll site-wide.
  *
  * v1.7.1 perf (visual parity):
- * - Widget depth: 2-layer drop-shadow compromise (softer than paper box-shadow, cheaper than 3-layer)
+ * - Dashboard: 3-layer static drop-shadow modules; chrome uses box-shadow; freeze particles on dashboard
  * - CA 2026.07.x: Awesomplete suggestions + nested subCategory + loader JS reinject
  * - Viewport wallpaper on html (cover + fixed + black fallback); no short-body white gaps
  * - Particle layer: transform-only drift, isolated compositing
@@ -185,6 +185,13 @@ body.ucwc-apps::after {
         will-change: auto;
     }
 }
+/* Dashboard: keep particle look but stop continuous motion while scrolling modules */
+body.ucwc-dashboard::after {
+    animation: none !important;
+    will-change: auto !important;
+    transform: none !important;
+}
+
 /* unraid-custom-webui-css:particles:end */
 
 /* Pause continuous full-page motion while the browser tab is hidden (class from apps-enhancement.js) */
@@ -192,7 +199,22 @@ body.ucwc-tab-hidden::after {
     animation-play-state: paused !important;
 }
 body.ucwc-tab-hidden #header img[src*="UN-logotype-gradient.svg"],
-body.ucwc-tab-hidden #header .logo {
+body.ucwc-tab-hidden #header .logo,
+body.ucwc-tab-hidden .fa.fa-play.started.green-text,
+body.ucwc-tab-hidden .fa.fa-square.stopped.red-text,
+body.ucwc-tab-hidden .system.icon-u-lock.green-text,
+body.ucwc-tab-hidden .system.icon-u-lock-open.red-text,
+body.ucwc-tab-hidden .icon-u-search.system,
+body.ucwc-tab-hidden .icon-u-logout.system,
+body.ucwc-tab-hidden .icon-u-terminal.system,
+body.ucwc-tab-hidden .fa.fa-tty.system,
+body.ucwc-tab-hidden .icon-u-duplicate.system,
+body.ucwc-tab-hidden .icon-u-chat.system,
+body.ucwc-tab-hidden .icon-u-display.system,
+body.ucwc-tab-hidden .icon-u-log.system,
+body.ucwc-tab-hidden .icon-u-help.system,
+body.ucwc-tab-hidden .icon-u-delete.system,
+body.ucwc-tab-hidden .icon-u-switch.system {
     animation-play-state: paused !important;
 }
 
@@ -918,7 +940,7 @@ table.dashboard > tbody > tr:nth-child(even) {
     background-color: transparent !important;
 }
 table.dashboard > tbody > tr > td {
-    background: rgba(0, 0, 0, 0.24) !important;
+    background: rgba(12, 16, 24, 0.42) !important;
     background-clip: padding-box !important;
     border-top: 0 !important;
     border-bottom: 0 !important;
@@ -959,29 +981,38 @@ table.dashboard > tbody > tr:last-child > td:last-child {
     overflow: hidden !important;
 }
 
-/* -------------------- 29. Dashboard 模块外壳层次（折中：2 层 drop-shadow） -------------------- */
-/* 3 层滤镜太贵、纯 box-shadow 太扁。默认 2 层软投影保留悬浮感，hover 再略加深。 */
+/* -------------------- 29. Dashboard 模块外壳层次（仪表盘专用：3 层 soft depth） -------------------- */
+/* 仅仪表盘用完整 3 层 drop-shadow，避免纸片感；导航/其它页仍用更轻的 2 层。 */
 table.dashboard > tbody {
     outline: 0 !important;
     box-shadow: none !important;
+    /* 静态 3 层深度；hover 只抬升不改 filter，避免滚动/悬停反复重算滤镜 */
     filter:
-        drop-shadow(0 5px 5px rgba(0, 0, 0, 0.30))
-        drop-shadow(0 14px 12px rgba(0, 0, 0, 0.18));
-    transition: transform 0.25s ease, filter 0.25s ease;
+        drop-shadow(0 4px 3px rgba(0, 0, 0, 0.28))
+        drop-shadow(0 12px 10px rgba(0, 0, 0, 0.32))
+        drop-shadow(0 24px 18px rgba(0, 0, 0, 0.22));
+    transition: transform 0.2s ease;
+    contain: layout style;
+    transform: translateZ(0);
 }
 
 table.dashboard > tbody:hover {
     outline: 0 !important;
     box-shadow: none !important;
-    transform: translateY(-2px);
-    filter:
-        drop-shadow(0 7px 7px rgba(0, 0, 0, 0.34))
-        drop-shadow(0 18px 14px rgba(0, 0, 0, 0.22));
+    transform: translate3d(0, -3px, 0);
+    /* filter 与静止态相同 —— 深度不丢，省掉 filter transition 重绘 */
 }
 
-/* 顶部受光高光（写在 td 上，不干扰 filter） */
+/* 顶部受光 + 底部微内阴影，增加体积感（写在 td 上，不干扰 filter） */
 table.dashboard > tbody > tr:first-child > td {
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.10) !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.16),
+        inset 0 -1px 0 rgba(0, 0, 0, 0.12) !important;
+}
+table.dashboard > tbody > tr.last > td,
+table.dashboard > tbody > tr.tr_last > td,
+table.dashboard > tbody > tr:last-child > td {
+    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06) !important;
 }
 /* -------------------- 30. 去除模块内部直角边框（避免与 tbody 圆角外壳双重效果） -------------------- */
 .dash_card, .tile {
@@ -1015,10 +1046,11 @@ nav.tabs {
     padding: 6px !important;
     margin-bottom: 14px !important;
     border: 0 !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
-    filter:
-        drop-shadow(0 5px 5px rgba(0,0,0,.30))
-        drop-shadow(0 14px 12px rgba(0,0,0,.18));
+    filter: none !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 6px 10px rgba(0,0,0,.28),
+        0 14px 18px rgba(0,0,0,.18) !important;
 }
 
 nav.tabs .tabs-container {
@@ -1062,10 +1094,12 @@ nav.tabs button[role="tab"][aria-selected="true"] {
     background-color: rgba(20, 24, 34, 0.55) !important;
     border: 0 !important;
     border-radius: 14px !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.10) !important;
-    filter:
-        drop-shadow(0 5px 5px rgba(0,0,0,.30))
-        drop-shadow(0 14px 12px rgba(0,0,0,.18)) !important;
+    /* sticky 导航用 box-shadow，避免滚动时反复合成 filter */
+    filter: none !important;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.10),
+        0 6px 10px rgba(0,0,0,.28),
+        0 14px 18px rgba(0,0,0,.18) !important;
 }
 
 #menu:before,

@@ -1,12 +1,21 @@
 {
   "schema": 1,
-  "default": "v1.7.0",
-  "latest_version": "v1.7.0",
+  "default": "v1.7.1",
+  "latest_version": "v1.7.1",
   "versions": [
+    {
+      "id": "v1.7.1",
+      "label": "性能折中阴影、CA 2026.07 对齐、顶部导航滚动条隐藏",
+      "channel": "latest",
+      "released_at": "2026-07-23",
+      "apps_enhancement": true,
+      "particles": true,
+      "hutao": true
+    },
     {
       "id": "v1.7.0",
       "label": "双端同步优化、结构减负与可选粒子/胡桃",
-      "channel": "latest",
+      "channel": "history",
       "released_at": "2026-07-20",
       "apps_enhancement": true,
       "particles": true,

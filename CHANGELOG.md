@@ -1,5 +1,24 @@
 # 更新日志
 
+## v1.7.1 - 2026-07-23
+
+### 仪表盘深度与性能折中
+
+- 模块阴影由 3 层 `drop-shadow` 调整为 2 层：保留圆角软阴影悬浮感，降低滚动与悬停时的滤镜开销。
+- 壁纸继续使用 `html` 上 `cover + fixed`，避免短页面留白；不再用 `scroll` 牺牲全屏铺满。
+- 保留页眉 Logo 动态与粒子/胡桃特效；标签页隐藏时继续暂停连续动画。
+
+### Community Applications 2026.07.x 对齐
+
+- 搜索建议适配 Awesomplete（不再依赖 jQuery UI autocomplete 选择器）。
+- 建议列表挂载到 `body` 并以 `fixed` + rAF 跟随搜索框，避免被搜索条裁切。
+- 桌面端左侧分类菜单保持常显；补齐嵌套 `subCategory` 菜单样式。
+- `CustomCSS_Loader` 在插件启用时可靠注入 `apps-enhancement.js`（`filemtime` 缓存刷新）。
+
+### 顶部导航
+
+- 隐藏顶部菜单栏（仪表盘/主界面等）与右侧切换区 Unraid 内置细滚动条；窄屏仍可横向滑动。
+
 ## v1.7.0 - 2026-07-20
 
 ### PC 与移动端同步优化
